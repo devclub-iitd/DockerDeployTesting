@@ -14,14 +14,6 @@ app.get('/', (req, res) => {
 
 app.post('/sendmail', async (req,res) => {
 
-    let transporter = nodemailer.createTransport({
-        service : "Gmail",
-        auth: {
-          user: process.env["USER_EMAIL"],
-          pass: process.env["USER_PASS"]
-        }
-    });
-
     const email = req.body.email;
 
     console.log("Mail will be sent to : " + email)
@@ -31,6 +23,20 @@ app.post('/sendmail', async (req,res) => {
     }
 
     try {
+
+        let testAccount = await nodemailer.createTestAccount();
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+            user: testAccount.user, // generated ethereal user
+            pass: testAccount.pass // generated ethereal password
+            }
+        });
+        
         // send mail with defined transport object
         let info = await transporter.sendMail({
             from: '"Fred Foo 👻" <foo@example.com>', 
