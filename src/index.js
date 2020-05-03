@@ -34,7 +34,8 @@ app.post('/sendmail', async (req,res) => {
             auth: {
             user: testAccount.user, // generated ethereal user
             pass: testAccount.pass // generated ethereal password
-            }
+            },
+            proxy: process.env["http_proxy"]
         });
         
         // send mail with defined transport object
