@@ -29,22 +29,17 @@ app.post('/sendmail', async (req,res) => {
     const accessToken = oauth2Client.getAccessToken()
     
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
         secure: true,
         service: 'Gmail',
         auth: {
-            type: "OAuth2",
-            user: "portfoliocreatoriitd@gmail.com", 
-            clientId: process.env["CLIENT_ID"],
-            clientSecret: process.env["CLIENT_SECRET"],
-            refreshToken: process.env["REFRESH_TOKEN"],
-            accessToken: accessToken
+            user: process.env["USER_EMAIL"],
+          pass: process.env["USER_PASS"]
         },
         logger:true,
         debug:true,
-        proxy : process.env["https_proxy"]
+        proxy : "socks://10.17.5.23:9002"
     });
+    transporter.set('proxy_socks_module', require('socks'));
 
     const email = req.body.email;
 
@@ -62,9 +57,6 @@ app.post('/sendmail', async (req,res) => {
             subject: "Hello ✔", 
             text: "Hello world?", 
             html: "<b>Hello world?</b>"
-        }, (err) => {
-            console.log("ERROR");
-            console.log(err)
         });
 
         // dump info about mail to console
