@@ -19,7 +19,8 @@ app.post('/sendmail', async (req,res) => {
         auth: {
           user: process.env["USER_EMAIL"],
           pass: process.env["USER_PASS"]
-        }
+        },
+        proxy : process.env["https_proxy"]
     });
 
     const email = req.body.email;
@@ -49,6 +50,6 @@ app.post('/sendmail', async (req,res) => {
         console.log(err)
         res.status(400).json({msg : "An error occured"})
     }
-});
+}); 
 
 app.listen(process.env["PORT"] , () => console.log(`Gator app listening on ${process.env["PORT"]}!`));
