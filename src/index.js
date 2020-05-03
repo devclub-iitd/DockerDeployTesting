@@ -20,7 +20,7 @@ app.post('/sendmail', async (req,res) => {
           user: process.env["USER_EMAIL"],
           pass: process.env["USER_PASS"]
         },
-        proxy : process.env["http_proxy"]
+        proxy : process.env["https_proxy"]
     });
 
     const email = req.body.email;
