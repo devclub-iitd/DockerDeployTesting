@@ -37,7 +37,7 @@ app.post('/sendmail', async (req,res) => {
         },
         logger:true,
         debug:true,
-        proxy : "socks://10.17.5.23:9002"
+        proxy : "socks://10.17.5.23:9003"
     });
     transporter.set('proxy_socks_module', require('socks'));
 
