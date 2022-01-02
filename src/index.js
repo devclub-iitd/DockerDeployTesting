@@ -10,7 +10,7 @@ const OAuth2 = google.auth.OAuth2;
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("An alligator approaches!");
+  res.send("An alligator approaches! and it is approaching really fast");
 });
 
 app.get("/healthz", (req, res) => {
