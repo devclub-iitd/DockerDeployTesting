@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   deploy_test:
-    image: "${REGISTRY_NAME}devclubiitd/deploy_test:0.1"
+    image: "${REGISTRY_NAME}devclubiitd/deploy_test:0.2"
     healthcheck:
       test: ["CMD", "curl", "http://localhost:${PORT}"]
       interval: 1m30s
